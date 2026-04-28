@@ -34,10 +34,10 @@ WITH cumulative AS (
 SELECT c.person_name
 FROM cumulative c
 INNER JOIN (
-    SELECT MAX(turn) AS last_turn          -- find the last turn with total_weight <= 1000
+    SELECT MAX(turn) AS last_turn  -- find the last turn with total_weight <= 1000
     FROM cumulative
     WHERE total_weight <= 1000
-) last ON c.turn = last.last_turn;         -- join to get the person name of that turn
+) last ON c.turn = last.last_turn; -- join to get the person name of that turn
 
 -- Solution 2: window function (preferred, more efficient)
 WITH cumulative AS (
@@ -49,6 +49,6 @@ WITH cumulative AS (
 )
 SELECT person_name
 FROM cumulative
-WHERE total_weight <= 1000                  -- keep only those who fit
+WHERE total_weight <= 1000  -- keep only those who fit
 ORDER BY turn DESC
-LIMIT 1;                                    -- get the last person who can board
+LIMIT 1;  -- get the last person who can board
